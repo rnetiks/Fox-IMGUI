@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxGui Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="editor-panel">
+    <div class="editor-header">
+        <span>FoxGui Code</span>
+        <div class="view-toggle">
+            <button id="view-code">Code</button>
+            <button id="view-split" class="active">Split</button>
+            <button id="view-preview">Preview</button>
+        </div>
+    </div>
+    <div class="editor">
+        <textarea id="code-editor" spellcheck="false">// Basic Elements
+GUI.Label(new Rect(50, 50, 200, 20), "Hello FoxGui!");
+GUI.Button(new Rect(50, 80, 150, 30), "Click Me");
+GUI.TextField(new Rect(50, 120, 200, 25), "Text Input");
+GUI.Toggle(new Rect(50, 155, 150, 20), true, "Toggle Option");
+
+// Box Container
+GUI.Box(new Rect(280, 50, 200, 150), "Box Title");
+
+// Window
+GUI.Window(0, new Rect(520, 50, 300, 250), MyWindow, "My Window");
+
+function MyWindow(id) {
+    GUI.Label(new Rect(10, 25, 280, 20), "Inside Window");
+    GUI.Button(new Rect(10, 50, 130, 25), "Button 1");
+    GUI.Button(new Rect(150, 50, 130, 25), "Button 2");
+}</textarea>
+    </div>
+</div>
+
+<div id="resizer" class="resizer"></div>
+
+<div class="preview-panel">
+    <div class="preview-header">
+        <div>
+            <span id="scale-info">1920 × 1080</span>
+            <span><select name="" class="property-input" onchange="changeGridMode(this)" id="grid-mode">
+                <option value="1">none</option>
+                <option value="2">grid</option>
+                <option value="3">elements</option>
+            </select></span>
+            <span><input type="number" class="property-input" value="10" min="2" onchange="changeGridSize(this)"></span>
+        </div>
+        <div class="view-toggle">
+            <button id="view-code-2">Code</button>
+            <button id="view-split-2" class="active">Split</button>
+            <button id="view-preview-2">Preview</button>
+            <button id="export-btn" class="toolbar-btn" style="margin-left: 8px;">Export</button>
+        </div>
+    </div>
+    <div class="toolbar">
+        <button class="toolbar-btn" data-type="Label">+ Label</button>
+        <button class="toolbar-btn" data-type="Button">+ Button</button>
+        <button class="toolbar-btn" data-type="TextField">+ TextField</button>
+        <button class="toolbar-btn" data-type="Toggle">+ Toggle</button>
+        <button class="toolbar-btn" data-type="HorizontalSlider">+ H-Slider</button>
+        <button class="toolbar-btn" data-type="VerticalSlider">+ V-Slider</button>
+        <button class="toolbar-btn" data-type="DrawTexture">+ Texture</button>
+        <button class="toolbar-btn" data-type="Box">+ Box</button>
+        <button class="toolbar-btn" data-type="TextArea">+ TextArea</button>
+        <button class="toolbar-btn" data-type="PasswordField">+ Password</button>
+        <button class="toolbar-btn" data-type="HorizontalScrollbar">+ H-Scrollbar</button>
+        <button class="toolbar-btn" data-type="VerticalScrollbar">+ V-Scrollbar</button>
+        <button class="toolbar-btn" data-type="SelectionGrid">+ Grid</button>
+    </div>
+    <div class="preview-content-wrapper">
+        <div class="preview-container">
+            <div id="preview-canvas" class="preview-canvas"></div>
+        </div>
+        <div id="side-panels" class="side-panels">
+            <div id="tree-panel" class="tree-panel">
+                <div class="panel-header">
+                    <h3>Hierarchy (N)</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="tree-view" class="tree-view"></div>
+                </div>
+            </div>
+            <div id="panel-resizer" class="resizer-vertical"></div>
+            <div id="properties-panel" class="properties-panel">
+                <div class="panel-header">
+                    <h3>Properties (Alt+N)</h3>
+                </div>
+                <div class="panel-body" id="properties-body">
+                    <div style="color: #858585; font-size: 12px;">No selection</div>
+                </div>
+            </div>
+        </div>
+        <div id="cache-panel" class="cache-panel">
+            <div class="cache-panel-header">
+                <h3>Assets (Alt+A)</h3>
+            </div>
+            <div class="cache-panel-body">
+                <input type="file" id="file-upload" accept="image/*" style="display: none;" multiple>
+                <button class="upload-btn" onclick="document.getElementById('file-upload').click()">Upload Images
+                </button>
+                <div id="cache-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
